@@ -1,8 +1,4 @@
 <?php
-/**
- * @author Burak Seydioglu
- * @link http://blog.logicexception.com/2012/04/securing-syfmony2-rest-service-wiith.html
- */
 
 namespace FOS\OAuthServerBundle\Command;
 
@@ -12,6 +8,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @author Burak Seydioglu
+ * @link http://blog.logicexception.com/2012/04/securing-syfmony2-rest-service-wiith.html
+ */
 class CreateClientCommand extends ContainerAwareCommand
 {
     protected function configure()
@@ -38,6 +38,9 @@ EOT
         $client->setRedirectUris($input->getOption('redirect-uri'));
         $client->setAllowedGrantTypes($input->getOption('grant-type'));
         $clientManager->updateClient($client);
-        $output->writeln(sprintf('Added a new client with name <info>%s</info> and public id <info>%s</info>.', $client->getName(), $client->getPublicId()));
+        $output->writeln('Added a new client.');
+        $output->writeln(sprintf('Name: <info>%s</info>', $client->getName()));
+        $output->writeln(sprintf('Public Id: <info>%s</info>', $client->getPublicId()));
+        $output->writeln(sprintf('Secret: <info>%s</info>', $client->getSecret()));
     }
 }
