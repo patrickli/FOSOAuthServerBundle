@@ -86,6 +86,7 @@ class OAuthProvider implements AuthenticationProviderInterface
                 if (null !== $user) {
 
                     try {
+                        $this->userChecker->checkPreAuth($user);
                         $this->userChecker->checkPostAuth($user);
                     } catch (AccountStatusException $e) {
                         throw new OAuth2AuthenticateException(OAuth2::HTTP_UNAUTHORIZED,
